@@ -1,6 +1,5 @@
-const socket = new Paho.Client("wss://0x7f.one/mqtt", "snowaas-0.1.0");
-socket.onMessageArrived = (message) => {
-  const posX = parseFloat(message.payloadString);
+setInterval(() => {
+  const posX = Math.random();
   if (!document.hidden) {
     const droplet = document.createElement("div");
     droplet.style.position = "fixed";
@@ -21,14 +20,4 @@ socket.onMessageArrived = (message) => {
       droplet.style.top = "110vh";
     }, 160);
   }
-};
-socket.onConnectionLost = (_evt) => {
-  socket.connect({
-    userName: "public",
-    password: "public",
-    onSuccess() {
-      socket.subscribe("snow/fall");
-    }
-  });
-};
-socket.onConnectionLost(undefined);
+}, 420);
